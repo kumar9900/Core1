@@ -3,19 +3,57 @@ package com.example.core1
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
+    var total:Int=0
+    override fun onStart() {
+        super.onStart()
+        Log.i("LifeCycle","onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("LifeCycle","onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("LifeCycle","onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i("LifeCycle","onStop")
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("LifeCycle","onDestroy")
+
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.i("LifeCycle","onRestart")
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val count = 0//inital counter value after reset
+        Log.i("LifeCycle","onCreate")
+        val count = 0//initial counter value after reset
         val increment = 1//increment and decrement operator
-        var total = 0//create a variable for the total value
         val reset = findViewById<Button>(R.id.Reset)//reset button set to val reset
         val score = findViewById<Button>(R.id.score)//score button set to val score
         val steal = findViewById<Button>(R.id.steal)//steal button set to val steal
+        savedInstanceState?.let {
+            total=it.getInt("Total")
+            findViewById<TextView>(R.id.total).text =total.toString()
+        }
         reset.setOnClickListener {
             findViewById<TextView>(R.id.total).text = count.toString()//reset text view string to 0
             total = 0
@@ -54,5 +92,11 @@ class MainActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.total).text =
                 total.toString()//send total variable to the text view
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("Total",total)
+        Log.i("LifeCycle","SavedInstanceState $total")
     }
 }
