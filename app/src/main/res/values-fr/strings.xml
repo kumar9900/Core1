@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Core1</string>
+    <string name="Score">But</string>
+    <string name="Reset">réinitialiser</string>
+    <string name="Steal">voler</string>
+</resources>
